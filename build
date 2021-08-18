@@ -1,0 +1,25 @@
+#!/usr/bin/env pwsh
+
+if ($args.Length -eq 0)
+{
+    Out-Host -InputObject "You must specify a file name. Exiting." 
+    exit
+} 
+elseif ($args.Length -gt 1)
+{
+    $filename = [System.String]::Join(" ", $args)
+} 
+else 
+{
+    $filename = $args[0]
+}
+
+pdflatex $filename
+
+# ri is the built-in PowerShell alias for Remove-Item
+ri *.aux
+ri *.docx
+ri *.dvi
+ri *.log
+ri *.out
+ri *.ps
